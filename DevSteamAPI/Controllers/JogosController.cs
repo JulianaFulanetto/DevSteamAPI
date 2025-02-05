@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DevSteamAPI.Data;
 using DevSteamAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevSteamAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class JogosController : ControllerBase
     {
         private readonly DevSteamAPIContext _context;
@@ -29,6 +31,7 @@ namespace DevSteamAPI.Controllers
         }
 
         // GET: api/Jogos/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Jogo>> GetJogo(Guid id)
         {
